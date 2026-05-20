@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llama-index-memory-engram"
+version = "0.1.0"
+description = "Engram memory integration for LlamaIndex — durable, explainable memory for agents."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [{ name = "Lumetra", email = "hi@lumetra.io" }]
+keywords = ["llama-index", "llamaindex", "engram", "lumetra", "memory", "agents", "llm", "rag"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "llama-index-core>=0.13.0,<0.16",
+  "requests>=2.31.0",
+]
+
+[project.urls]
+Homepage = "https://lumetra.io"
+Documentation = "https://lumetra.io/docs"
+Repository = "https://github.com/lumetra-io/engram-llamaindex"
+Issues = "https://github.com/lumetra-io/engram-llamaindex/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["llama_index"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "llama_index/",
+  "README.md",
+  "LICENSE",
+  "PRIVACY.md",
+  "pyproject.toml",
+]
+
+[tool.llamahub]
+contains_example = false
+import_path = "llama_index.memory.engram"
+
+[tool.llamahub.class_authors]
+EngramMemory = "lumetra-io"
