@@ -34,11 +34,24 @@ agent = FunctionAgent(
     tools=[...],
 )
 
+# IMPORTANT: pass memory to .run(), NOT to FunctionAgent(...)
 response = await agent.run(
     "What did we decide about the Q3 launch?",
     memory=memory,
 )
 ```
+
+> ### ⚠️ Pass `memory` to `agent.run()`, not the constructor
+>
+> Modern LlamaIndex `FunctionAgent.__init__` accepts arbitrary `**kwargs` but **silently swallows `memory=`** — your memory backend will appear configured but never actually be touched. You must pass `memory` to each `agent.run(..., memory=memory)` invocation. This is a LlamaIndex API quirk, not an issue with this package; we caught it in our e2e test and it's the single most common pitfall when wiring `EngramMemory`.
+>
+> If you want it to feel like a constructor arg, wrap once:
+>
+> ```python
+> async def chat(prompt: str) -> str:
+>     r = await agent.run(prompt, memory=memory)
+>     return str(r)
+> ```
 
 Get an API key at <https://lumetra.io>. Keys look like `eng_live_...`.
 
