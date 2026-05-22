@@ -246,7 +246,7 @@ class EngramMemory(BaseMemory):
         Use this when you want semantic recall over the entire history
         rather than the last `read_limit` messages.
         """
-        return self._post("/v1/query", {"query": question, "bucket": self.bucket})
+        return self._post("/v1/query", {"query": question, "buckets": [self.bucket]})
 
     def list_buckets(self, limit: int = 50, offset: int = 0) -> Dict[str, Any]:
         """List Engram buckets visible to this API key."""
